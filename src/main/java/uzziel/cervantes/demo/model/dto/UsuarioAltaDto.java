@@ -10,7 +10,7 @@ public class UsuarioAltaDto {
 	
 	private String password;
 	
-	private int referencia;
+	private Integer referencia;
 
 	public String getNombre() {
 		return nombre;
@@ -44,11 +44,11 @@ public class UsuarioAltaDto {
 		this.password = password;
 	}
 
-	public int getReferencia() {
+	public Integer getReferencia() {
 		return referencia;
 	}
 
-	public void setReferencia(int referencia) {
+	public void setReferencia(Integer referencia) {
 		this.referencia = referencia;
 	}
 	
