@@ -1,8 +1,15 @@
 package uzziel.cervantes.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -10,7 +17,7 @@ import javax.persistence.Table;
 public class Usuario {
 
 	@Id
-	@Column(name = "idusuario")
+	@Column(name = "id")
 	private int idUsuario;
 	
 	@Column(name = "nombre")
@@ -27,6 +34,29 @@ public class Usuario {
 
 	@Column(name = "usuario_referenciado")
 	private Integer usuarioReferenciado;
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(
+		name = "usuario_cupon",
+		joinColumns = { @JoinColumn(name = "id_usuario")},
+		inverseJoinColumns = { @JoinColumn(name = "id_cupon")}
+	)
+	private Set<Cupon> cupones = new HashSet<>();
+
+	public Usuario() {
+		
+	}
+	
+	public Usuario(int idUsuario, String nombre, String apellido, String correo, String password,
+			Integer usuarioReferenciado) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.password = password;
+		this.usuarioReferenciado = usuarioReferenciado;
+	}
 
 	public int getIdUsuario() {
 		return idUsuario;
@@ -76,5 +106,11 @@ public class Usuario {
 		this.usuarioReferenciado = usuarioReferenciado;
 	}
 	
-	
+	public Set<Cupon> getCupones() {
+		return cupones;
+	}
+
+	public void setCupones(Set<Cupon> cupones) {
+		this.cupones = cupones;
+	}
 }
